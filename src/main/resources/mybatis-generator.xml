@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="myContext" targetRuntime="MyBatis3" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+            <!-- 此处为 true 时，生成的 Mapper 接口将增加 @Mapper 注解，Spring ComponentScan 时可自动识别 -->
+            <property name="addMapperAnnotation" value="true"/>
+        </commentGenerator>
+
+        <!--<javaTypeResolver>-->
+        <!--<property name="forceBigDecimals" value="true" />-->
+        <!--</javaTypeResolver>-->
+
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@192.168.31.225:1521:oragbst"
+                        userId="xxd_v6_test"
+                        password="Fc9a5cc">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"></property>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.xxdai.datareportcenter.entity" targetProject="src/main/java">
+            <property name="trimStrings" value="true"/>
+            <!--<property name="rootClass" value="tk.mybatis.simple.model.BaseEntity" />-->
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xxdai.datareportcenter.dao"
+                             targetProject="src/main/java"/>
+
+
+        <!--<table tableName="XXD_XIEHUI_ORGIN_DEBT"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="XXD_XIEHUI_ORGIN_DEBT_BORROWER"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="XXD_XIEHUI_ORGIN_DEBT_LENDER"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="XXD_XIEHUI_DEBT_TRANSFER"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="XXD_XIEHUI_DEBT_TRANSFERFEE"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>-->
+
+        <table tableName="XXD_XIEHUI_BORROW_PROJECT"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="XXD_XIEHUI_CONTRACT_ELEMENT"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="XXD_XIEHUI_CONTRACT_STATUS"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="XXD_XIEHUI_INVEST_RECEIVE"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+
+    </context>
+</generatorConfiguration>
