@@ -9,7 +9,7 @@ import sun.rmi.runtime.Log;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2019-04-08 15:15

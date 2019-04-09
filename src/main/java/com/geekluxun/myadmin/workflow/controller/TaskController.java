@@ -67,6 +67,17 @@ public class TaskController {
     }
 
 
+    @GetMapping("/executeTask2")
+    @ApiOperation(value = "执行任务2")
+    public Object executeTask2(@RequestParam("taskId") String taskId, @RequestParam("userId") String userId) throws Exception {
+        
+        Map para = new HashMap();
+        para.put("result", "reject");
+        taskService.complete(taskId, para);
+        return "任务执行完成";
+    }
+
+
     /**
      * 显示任务信息
      *

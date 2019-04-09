@@ -2,17 +2,20 @@ package com.geekluxun.myadmin.workflow.controller;
 
 import io.swagger.annotations.ApiOperation;
 import org.activiti.engine.HistoryService;
+import org.activiti.engine.history.HistoricActivityInstance;
+import org.activiti.engine.history.HistoricActivityInstanceQuery;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricProcessInstanceQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2019-04-08 17:56
@@ -61,7 +64,23 @@ public class HistoryController {
                 .processDefinitionKey("myProcess")
                 .orderByProcessInstanceDuration().desc()
                 .listPage(0, 10);
-
         return historyList;
     }
+
+
+    @GetMapping("/userTaskByProcessInstanceId")
+    @ApiOperation(value = "所有某个流程实例的所有人工节点")
+    public Object queryProcessInstanceTrace(@RequestParam("processInstanceId") String processInstanceId){
+
+        List<HistoricActivityInstance> historyList = historyService.createHistoricActivityInstanceQuery().activityType("userTask").processInstanceId(processInstanceId).list();
+        return historyList;
+    }
+
+    @GetMapping("/byProcessInstanceId")
+    @ApiOperation(value = "所有某个流程实例的所有节点")
+    public Object queryProcessInstanceTrace2(@RequestParam("processInstanceId") String processInstanceId){
+        List<HistoricActivityInstance> historyList = historyService.createHistoricActivityInstanceQuery().processInstanceId(processInstanceId).orderByHistoricActivityInstanceStartTime().desc().list();
+        return historyList;
+    }
+    
 }
