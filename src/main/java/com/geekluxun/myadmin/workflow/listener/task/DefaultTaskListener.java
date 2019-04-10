@@ -30,6 +30,11 @@ public class DefaultTaskListener implements TaskListener {
                 delegateTask.setVariableLocal("loadApplyId", loadApplyId);
                 
                 delegateTask.setDueDate(DateUtils.addMinutes(delegateTask.getCreateTime(), 2));
+
+                if (delegateTask.getTaskDefinitionKey().equals("usertask1")){
+                    // 把task增加到候选组
+                    delegateTask.addCandidateGroup("11");
+                }
                 break;
             }
             case EVENTNAME_ASSIGNMENT: {

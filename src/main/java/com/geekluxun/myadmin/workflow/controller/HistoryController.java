@@ -6,6 +6,7 @@ import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricActivityInstanceQuery;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricProcessInstanceQuery;
+import org.activiti.engine.task.TaskInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,6 +82,22 @@ public class HistoryController {
     public Object queryProcessInstanceTrace2(@RequestParam("processInstanceId") String processInstanceId){
         List<HistoricActivityInstance> historyList = historyService.createHistoricActivityInstanceQuery().processInstanceId(processInstanceId).orderByHistoricActivityInstanceStartTime().desc().list();
         return historyList;
+    }
+    
+    
+    @GetMapping("/byTaskId")
+    @ApiOperation(value = "查询某个任务")
+    public Object queryTask(@RequestParam("taskId") String taskId){
+        TaskInfo taskInfo = historyService.createHistoricTaskInstanceQuery().taskId(taskId).singleResult();
+        return  taskInfo;
+    }
+
+    
+    @GetMapping("/ActivityByUserId")
+    @ApiOperation(value = "查询分配给某人的所有活动")
+    public Object queryActivityByUserId(@RequestParam("userId") String userId){
+        List<HistoricActivityInstance> activityInstances = historyService.createHistoricActivityInstanceQuery().taskAssignee(userId).list();
+        return  activityInstances;
     }
     
 }
