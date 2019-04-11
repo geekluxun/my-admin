@@ -41,6 +41,35 @@ public class TaskController {
     }
 
 
+    @GetMapping("/taskCandidateUser")
+    @ApiOperation(value = "用户的候选任务")
+    public Object taskCandidateUser(@RequestParam("userId") String userId) {
+        List<Task> taskList = taskService.createTaskQuery().taskCandidateUser(userId).list();
+        log.info("用户:" + userId + "所有候选任务列表：");
+        return getTaskInfo(taskList);
+    }
+
+    @GetMapping("/taskCandidateGroup")
+    @ApiOperation(value = "组的候选任务")
+    public Object taskCandidateGroup(@RequestParam("groupId") String groupId) {
+        List<Task> taskList = taskService.createTaskQuery().taskCandidateGroup(groupId).list();
+        log.info("组:" + groupId + "所有候选任务列表：");
+        return getTaskInfo(taskList);
+    }
+
+
+    @GetMapping("/taskCandidateGroup")
+    @ApiOperation(value = "用户领取任务")
+    public Object taskClaim(@RequestParam("userId") String userId) {
+        List<Task> candidateTaskList = taskService.createTaskQuery().taskCandidateUser(userId).list();
+        if (candidateTaskList != null && candidateTaskList.size() > 0) {
+            taskService.claim(candidateTaskList.get(0).getId(), userId);
+            return "用户" + userId + "领取任务" + candidateTaskList.get(0).getId() + "成功";
+        }
+        return "用户没有候选任务";
+    }
+
+
     @GetMapping("/queryAllUnAssignedTasks")
     @ApiOperation(value = "查询所有未分配任务")
     public Object queryAllUnAssignedTasks() {
@@ -65,14 +94,14 @@ public class TaskController {
         taskService.complete(taskId);
         return "任务执行完成";
     }
-    
+
     @GetMapping("/executeTask2")
     @ApiOperation(value = "执行任务2")
     public Object executeTask2(@RequestParam("taskId") String taskId, @RequestParam("userId") String userId) throws Exception {
-        Map para = new HashMap();
+        Map para = new HashMap(10);
         para.put("result", "reject");
         taskService.complete(taskId, para);
-        
+
         return "任务执行完成";
     }
 
@@ -87,7 +116,7 @@ public class TaskController {
         List<Map> responseList = new ArrayList<>();
 
         for (Task task : tasks) {
-            Map response = new HashMap<>();
+            Map response = new HashMap<>(10);
             response.put("assignee", task.getAssignee());
             response.put("owner:", task.getOwner());
             response.put("name", task.getName());

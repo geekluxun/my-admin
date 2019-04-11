@@ -14,6 +14,6 @@ import org.activiti.engine.delegate.JavaDelegate;
 public class FinalAuditPassServiceTask implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) {
-        
+
     }
 }

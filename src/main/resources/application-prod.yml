@@ -4,7 +4,7 @@ spring:
       driver-class-name: com.mysql.jdbc.Driver
       url: jdbc:mysql://116.62.63.81:3306/
       username: root
-      password: geekluxun 
+      password: geekluxun
 #      driver-class-name: oracle.jdbc.driver.OracleDriver
 #      url: jdbc:oracle:thin:@//10.96.3.51:1521/oragbst
 #      username: xinxindb

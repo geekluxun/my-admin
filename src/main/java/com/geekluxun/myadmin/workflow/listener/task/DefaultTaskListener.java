@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Slf4j
 public class DefaultTaskListener implements TaskListener {
+    private static final String TASK_KEY = "usertask1";
     @Autowired
     RuntimeService runtimeService;
 
@@ -28,10 +29,10 @@ public class DefaultTaskListener implements TaskListener {
                 log.info("======任务创建======" + delegateTask.getName());
                 String loadApplyId = (String) delegateTask.getExecution().getVariable("loadApplyId");
                 delegateTask.setVariableLocal("loadApplyId", loadApplyId);
-                
+
                 delegateTask.setDueDate(DateUtils.addMinutes(delegateTask.getCreateTime(), 2));
 
-                if (delegateTask.getTaskDefinitionKey().equals("usertask1")){
+                if (TASK_KEY.equals(delegateTask.getTaskDefinitionKey())) {
                     // 把task增加到候选组
                     delegateTask.addCandidateGroup("11");
                 }

@@ -39,7 +39,7 @@ public class ProcessController {
 
 
     private Map getProcessInstanceInfo(ProcessInstance processInstance) {
-        Map map = new HashMap();
+        Map map = new HashMap(10);
         map.put("name", processInstance.getName());
         map.put("DeploymentId", processInstance.getDeploymentId());
         map.put("ActivityId", processInstance.getActivityId());
@@ -47,5 +47,5 @@ public class ProcessController {
         map.put("id", processInstance.getId());
         return map;
     }
-    
+
 }

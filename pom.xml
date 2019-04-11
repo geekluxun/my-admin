@@ -25,8 +25,8 @@
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-security</artifactId>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-security</artifactId>-->
         <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -49,7 +49,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -65,7 +65,7 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-engine</artifactId>
@@ -98,6 +98,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-rest</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>2.7.0</version>
@@ -116,7 +122,7 @@
 
 
     </dependencies>
-    
+
     <build>
 
         <finalName>my-admin</finalName>
@@ -157,7 +163,7 @@
                 </includes>
             </resource>
         </resources>
-        
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -182,10 +188,10 @@
                     </dependency>
 
                     <!--<dependency>-->
-                        <!--<groupId>com.hynnet</groupId>-->
-                        <!--<artifactId>oracle-driver-ojdbc_g</artifactId>-->
-                        <!--<version>12.1.0.2</version>-->
-                        <!--<scope>runtime</scope>-->
+                    <!--<groupId>com.hynnet</groupId>-->
+                    <!--<artifactId>oracle-driver-ojdbc_g</artifactId>-->
+                    <!--<version>12.1.0.2</version>-->
+                    <!--<scope>runtime</scope>-->
                     <!--</dependency>-->
                 </dependencies>
             </plugin>

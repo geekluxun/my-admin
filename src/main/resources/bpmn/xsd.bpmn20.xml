@@ -7,16 +7,21 @@
              targetNamespace="http://www.activiti.org/test">
     <process id="myProcess" name="My process" isExecutable="true">
         <extensionElements>
-            <activiti:executionListener event="start" class="com.geekluxun.myadmin.workflow.listener.execute.DefaultExecuteListener"/>
-            <activiti:executionListener event="end" class="com.geekluxun.myadmin.workflow.listener.execute.DefaultExecuteListener"/>
-            <activiti:executionListener event="take" class="com.geekluxun.myadmin.workflow.listener.execute.DefaultExecuteListener"/>
+            <activiti:executionListener event="start"
+                                        class="com.geekluxun.myadmin.workflow.listener.execute.DefaultExecuteListener"/>
+            <activiti:executionListener event="end"
+                                        class="com.geekluxun.myadmin.workflow.listener.execute.DefaultExecuteListener"/>
+            <activiti:executionListener event="take"
+                                        class="com.geekluxun.myadmin.workflow.listener.execute.DefaultExecuteListener"/>
         </extensionElements>
         <startEvent id="startevent1" name="Start"></startEvent>
-        <serviceTask id="servicetask1" name="反欺诈" activiti:class="com.geekluxun.myadmin.workflow.servicetask.AntiFraudServiceTask"></serviceTask>
+        <serviceTask id="servicetask1" name="反欺诈"
+                     activiti:class="com.geekluxun.myadmin.workflow.servicetask.AntiFraudServiceTask"></serviceTask>
         <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="servicetask1"></sequenceFlow>
         <exclusiveGateway id="exclusivegateway1" name="反欺诈结果"></exclusiveGateway>
         <sequenceFlow id="flow2" sourceRef="servicetask1" targetRef="exclusivegateway1"></sequenceFlow>
-        <serviceTask id="servicetask2" name="信用评估" activiti:class="com.geekluxun.myadmin.workflow.servicetask.CreditEvaluateServiceTask"></serviceTask>
+        <serviceTask id="servicetask2" name="信用评估"
+                     activiti:class="com.geekluxun.myadmin.workflow.servicetask.CreditEvaluateServiceTask"></serviceTask>
         <sequenceFlow id="flow3" sourceRef="exclusivegateway1" targetRef="servicetask2">
             <conditionExpression xsi:type="tFormalExpression"><![CDATA[${result == "true"}]]></conditionExpression>
         </sequenceFlow>
@@ -24,14 +29,21 @@
         <sequenceFlow id="flow4" sourceRef="servicetask2" targetRef="exclusivegateway2"></sequenceFlow>
         <userTask id="usertask1" name="初审-审核">
             <extensionElements>
-                <activiti:taskListener event="create" class="com.geekluxun.myadmin.workflow.listener.task.DefaultTaskListener"/>
-                <activiti:taskListener event="assignment" class="com.geekluxun.myadmin.workflow.listener.task.DefaultTaskListener"/>
-                <activiti:taskListener event="complete" class="com.geekluxun.myadmin.workflow.listener.task.DefaultTaskListener"/>
-                <activiti:taskListener event="delete" class="com.geekluxun.myadmin.workflow.listener.task.DefaultTaskListener"/>
-                <activiti:executionListener event="start" class="com.geekluxun.myadmin.workflow.listener.execute.DefaultExecuteListener"/>
-                <activiti:executionListener event="end" class="com.geekluxun.myadmin.workflow.listener.execute.DefaultExecuteListener"/>
-                <activiti:executionListener event="take" class="com.geekluxun.myadmin.workflow.listener.execute.DefaultExecuteListener"/>
-            </extensionElements>        
+                <activiti:taskListener event="create"
+                                       class="com.geekluxun.myadmin.workflow.listener.task.DefaultTaskListener"/>
+                <activiti:taskListener event="assignment"
+                                       class="com.geekluxun.myadmin.workflow.listener.task.DefaultTaskListener"/>
+                <activiti:taskListener event="complete"
+                                       class="com.geekluxun.myadmin.workflow.listener.task.DefaultTaskListener"/>
+                <activiti:taskListener event="delete"
+                                       class="com.geekluxun.myadmin.workflow.listener.task.DefaultTaskListener"/>
+                <activiti:executionListener event="start"
+                                            class="com.geekluxun.myadmin.workflow.listener.execute.DefaultExecuteListener"/>
+                <activiti:executionListener event="end"
+                                            class="com.geekluxun.myadmin.workflow.listener.execute.DefaultExecuteListener"/>
+                <activiti:executionListener event="take"
+                                            class="com.geekluxun.myadmin.workflow.listener.execute.DefaultExecuteListener"/>
+            </extensionElements>
         </userTask>
         <sequenceFlow id="flow5" sourceRef="exclusivegateway2" targetRef="usertask1"></sequenceFlow>
         <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"></exclusiveGateway>
@@ -64,11 +76,13 @@
         <sequenceFlow id="flow18" sourceRef="exclusivegateway9" targetRef="usertask8"></sequenceFlow>
         <exclusiveGateway id="exclusivegateway10" name="Exclusive Gateway"></exclusiveGateway>
         <sequenceFlow id="flow19" sourceRef="usertask8" targetRef="exclusivegateway10"></sequenceFlow>
-        <serviceTask id="servicetask3" name="终审通过" activiti:class="com.geekluxun.myadmin.workflow.servicetask.FinalAuditPassServiceTask"></serviceTask>
+        <serviceTask id="servicetask3" name="终审通过"
+                     activiti:class="com.geekluxun.myadmin.workflow.servicetask.FinalAuditPassServiceTask"></serviceTask>
         <sequenceFlow id="flow20" sourceRef="exclusivegateway10" targetRef="servicetask3"></sequenceFlow>
         <endEvent id="endevent1" name="工作流结束"></endEvent>
         <sequenceFlow id="flow21" sourceRef="servicetask3" targetRef="endevent1"></sequenceFlow>
-        <serviceTask id="usertask9" name="工单拒绝" activiti:class="com.geekluxun.myadmin.workflow.servicetask.RejectServiceTask"></serviceTask>
+        <serviceTask id="usertask9" name="工单拒绝"
+                     activiti:class="com.geekluxun.myadmin.workflow.servicetask.RejectServiceTask"></serviceTask>
         <sequenceFlow id="flow24" sourceRef="exclusivegateway1" targetRef="usertask9">
             <conditionExpression xsi:type="tFormalExpression"><![CDATA[${result == "false"}]]></conditionExpression>
         </sequenceFlow>

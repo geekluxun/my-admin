@@ -3,9 +3,7 @@ package com.geekluxun.myadmin.workflow.controller;
 import io.swagger.annotations.ApiOperation;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.history.HistoricActivityInstance;
-import org.activiti.engine.history.HistoricActivityInstanceQuery;
 import org.activiti.engine.history.HistoricProcessInstance;
-import org.activiti.engine.history.HistoricProcessInstanceQuery;
 import org.activiti.engine.task.TaskInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,34 +29,26 @@ public class HistoryController {
 
     /**
      * 已完成的工作流
+     *
      * @return
      */
     @GetMapping("/completed")
     @ApiOperation(value = "已完成的工作流")
-    public Object queryCompleted(){
-//        List<HistoricProcessInstance> historyList = historyService.createHistoricProcessInstanceQuery()
-//                .finished()
-//                .processDefinitionId("myProcess:2:15004")
-//                .orderByProcessInstanceDuration().desc()
-//                .listPage(0, 10);
+    public Object queryCompleted() {
 
         List<HistoricProcessInstance> historyList = historyService.createHistoricProcessInstanceQuery()
-            .finished()
-            .processDefinitionKey("myProcess")
-            .orderByProcessInstanceDuration().desc()
-            .listPage(0, 10);
-        
+                .finished()
+                .processDefinitionKey("myProcess")
+                .orderByProcessInstanceDuration().desc()
+                .listPage(0, 10);
+
         return historyList;
     }
 
     @GetMapping("/uncompleted")
     @ApiOperation(value = "未完成的工作流")
-    public Object queryUnCompleted(){
-//        List<HistoricProcessInstance> historyList = historyService.createHistoricProcessInstanceQuery()
-//                .unfinished()
-//                .processDefinitionId("myProcess:2:15004")
-//                .orderByProcessInstanceDuration().desc()
-//                .listPage(0, 10);
+    public Object queryUnCompleted() {
+
 
         List<HistoricProcessInstance> historyList = historyService.createHistoricProcessInstanceQuery()
                 .unfinished()
@@ -67,11 +57,10 @@ public class HistoryController {
                 .listPage(0, 10);
         return historyList;
     }
-
-
+    
     @GetMapping("/userTaskByProcessInstanceId")
     @ApiOperation(value = "所有某个流程实例的所有人工节点")
-    public Object queryProcessInstanceTrace(@RequestParam("processInstanceId") String processInstanceId){
+    public Object queryProcessInstanceTrace(@RequestParam("processInstanceId") String processInstanceId) {
 
         List<HistoricActivityInstance> historyList = historyService.createHistoricActivityInstanceQuery().activityType("userTask").processInstanceId(processInstanceId).list();
         return historyList;
@@ -79,25 +68,33 @@ public class HistoryController {
 
     @GetMapping("/byProcessInstanceId")
     @ApiOperation(value = "所有某个流程实例的所有节点")
-    public Object queryProcessInstanceTrace2(@RequestParam("processInstanceId") String processInstanceId){
+    public Object queryProcessInstanceTrace2(@RequestParam("processInstanceId") String processInstanceId) {
         List<HistoricActivityInstance> historyList = historyService.createHistoricActivityInstanceQuery().processInstanceId(processInstanceId).orderByHistoricActivityInstanceStartTime().desc().list();
         return historyList;
     }
-    
-    
+
+
     @GetMapping("/byTaskId")
     @ApiOperation(value = "查询某个任务")
-    public Object queryTask(@RequestParam("taskId") String taskId){
+    public Object queryTask(@RequestParam("taskId") String taskId) {
         TaskInfo taskInfo = historyService.createHistoricTaskInstanceQuery().taskId(taskId).singleResult();
-        return  taskInfo;
+        return taskInfo;
     }
 
-    
+
     @GetMapping("/ActivityByUserId")
     @ApiOperation(value = "查询分配给某人的所有活动")
-    public Object queryActivityByUserId(@RequestParam("userId") String userId){
+    public Object queryActivityByUserId(@RequestParam("userId") String userId) {
         List<HistoricActivityInstance> activityInstances = historyService.createHistoricActivityInstanceQuery().taskAssignee(userId).list();
-        return  activityInstances;
+        return activityInstances;
     }
-    
+
+    @GetMapping("/queryProcessInstanceState")
+    @ApiOperation(value = "查询流程实例的是否结束")
+    public Object query(@RequestParam("processInstanceId") String procId) {
+        HistoricProcessInstance historicProcessInstance =
+                historyService.createHistoricProcessInstanceQuery().processInstanceId(procId).singleResult();
+        return "流程实例的结束时间:" + historicProcessInstance.getEndTime();
+    }
+
 }

@@ -1,10 +1,8 @@
 package com.geekluxun.myadmin.workflow.servicetask;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
-import sun.rmi.runtime.Log;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,12 +11,13 @@ import java.util.concurrent.TimeUnit;
  *
  * @Author: luxun
  * @Create: 2019-04-08 15:15
- * @Description:
+ * @Description: 注意同一个ServcieTask的JavaDelegate实现只有一个实例，被多个流程实例并发共享，所以
+ * 此类必须是线程安全的！！
  * @Other:
  */
 @Slf4j
 public class AntiFraudServiceTask implements JavaDelegate {
-    
+
     @Override
     public void execute(DelegateExecution delegateExecution) {
         log.info("开始执行反欺诈....");

@@ -14,6 +14,6 @@ import org.activiti.engine.delegate.JavaDelegate;
 public class CreditEvaluateServiceTask implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) {
-        
+
     }
 }

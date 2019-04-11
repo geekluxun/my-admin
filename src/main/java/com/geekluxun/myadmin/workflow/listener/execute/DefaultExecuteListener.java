@@ -19,9 +19,8 @@ import java.util.Map;
 public class DefaultExecuteListener implements ExecutionListener {
 
     @Override
-    public void notify(DelegateExecution delegateExecution)  {
+    public void notify(DelegateExecution delegateExecution) {
         log.info("当前执行所有信息：" + getExecutionInfo(delegateExecution));
-        //delegateExecution.getEngineServices().getTaskService();
         switch (delegateExecution.getEventName()) {
             case EVENTNAME_START: {
                 log.info("======执行开始======" + delegateExecution.getCurrentActivityId());
@@ -34,7 +33,6 @@ public class DefaultExecuteListener implements ExecutionListener {
             case EVENTNAME_END: {
                 log.info("======执行结束======" + delegateExecution.getCurrentActivityId());
                 String result = (String) delegateExecution.getVariable("result");
-                //delegateExecution.setVariable("result", result);
                 break;
             }
             default: {
@@ -51,7 +49,7 @@ public class DefaultExecuteListener implements ExecutionListener {
      * @return
      */
     private Map getExecutionInfo(DelegateExecution execution) {
-        Map paras = new HashMap();
+        Map paras = new HashMap(10);
         paras.put("CurrentActivityId", execution.getCurrentActivityId());
         paras.put("ExecutionId:", execution.getId());
         paras.put("CurrentFlowElement", execution.getCurrentFlowElement());
