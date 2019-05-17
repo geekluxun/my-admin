@@ -58,7 +58,7 @@ public class TaskController {
     }
 
 
-    @GetMapping("/taskCandidateGroup")
+    @GetMapping("/claimTask")
     @ApiOperation(value = "用户领取任务")
     public Object taskClaim(@RequestParam("userId") String userId) {
         List<Task> candidateTaskList = taskService.createTaskQuery().taskCandidateUser(userId).list();
